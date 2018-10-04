@@ -1,0 +1,52 @@
+// Generate and set html table on Details section
+const setTable = (userDetails, repoList) => {
+
+  const tableRows = [];
+  
+  repoList.forEach((repo) => {
+    tableRows.push(`<tr class="record">
+        <th class="repo_url" scope="row"><a href="${repo.html_url}">${repo.name}</a></th>
+        <td class="repo_stars">${repo.stargazers_count}</td>
+        <td class="repo_language">${repo.language}</td>
+      </tr>`);
+  });
+
+  const tableTemplate = `<table>
+      <caption>${userDetails.name}'s Github Repositories</caption>
+      <thead>
+        <th scope="col">Repository</th>
+        <th scope="col">Stars</th>
+        <th scope="col">Language</th>
+      </thead>
+      <tbody class="repos">
+        ${tableRows.join("")}
+      </tbody>
+    </table>`;
+
+  document.querySelector('.details').innerHTML = tableTemplate.trim();
+};
+
+// common fetch function
+async function fetchFromGithub(endpoint) {
+  const url = `https://api.github.com${endpoint}`;
+  const response = await fetch(url);
+  return await response.json();
+}
+
+async function searchUserDetails() {
+  const userName = document.searchForm.user_name.value;
+  if (userName) {
+
+    // request user-details and user-repos simultanelusly
+    const [user, repos] = await Promise.all([
+      fetchFromGithub(`/users/${userName}`),
+      fetchFromGithub(`/users/${userName}/repos`)
+    ]);
+
+    // set the html table on view
+    setTable(user, repos);
+  }
+  else {
+    alert('Invalid or no user name supplied!');
+  }
+};

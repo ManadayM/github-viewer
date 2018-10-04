@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Github Viewer</title>
+  <link rel="stylesheet" href="./dist/libs/normalize/normalize.css">
+  <link rel="stylesheet" href="./dist/styles/main.css">
+</head>
+
+<body>
+  <header>
+    <h1>Github Viewer</h1>
+  </header>
+  <main>
+    <section class="search">
+      <form name="searchForm">
+        <div>
+          <input type="text" name="user_name" id="username" placeholder="Github username" onchange="onSearchChange(this)">
+          <button type="button" onclick="searchRepos()">Search</button>
+          <button type="reset" onclick="resetSearch()">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="details"></section>
+  </main>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./dist/scripts/main.js"></script>
+</body>
+
+</html>

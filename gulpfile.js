@@ -49,5 +49,10 @@ gulp.task('build', function () {
     else {
       console.log('Build completed successfully.');
     }
-  })
-})
+  });
+});
+
+gulp.task('default', ['build'], function(){
+  gulp.watch('./source/**/*.js', ['build-scripts']);
+  gulp.watch('./source/**/*.scss', ['build-styles']);
+});

@@ -3,6 +3,7 @@ const sass = require('gulp-sass');
 const del = require('del');
 const uglify = require('gulp-uglify');
 const filter = require('gulp-filter');
+const cssnano = require('gulp-cssnano');
 const runSequence = require('run-sequence');
 
 gulp.task('build-clean', function () {
@@ -25,6 +26,7 @@ gulp.task('build-styles', function () {
     './source/styles/**/*.css'
   ])
     .pipe(sass().on('error', sass.logError))
+    .pipe(cssnano())
     .pipe(gulp.dest('./dist/styles'))
 });
 

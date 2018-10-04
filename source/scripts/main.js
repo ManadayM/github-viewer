@@ -23,6 +23,7 @@
     document.querySelector('.details').innerHTML = tableTemplate.trim();
   }
 
+  // Search list of repository for the supplied username
   function searchRepos() {
     var userName = document.searchForm.user_name.value;
     if (userName) {
@@ -49,11 +50,14 @@
     }
   };
 
+  // Clear search box and tabluar data on Clear button click
   function resetSearch() {
     document.searchForm.user_name.value = "";
     document.querySelector('.details').innerHTML = "";
   }
 
+  // Check if user has cleared the search box
+  // if so, flush out the tabular data for last query
   function onSearchChange(eventSource) {
     if (!eventSource.value) {
       document.querySelector('.details').innerHTML = "";
